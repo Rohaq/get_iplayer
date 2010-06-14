@@ -5626,7 +5626,8 @@ sub get_stream_data_cdn {
 
 		# Akamai CDN
 		if ( $cattribs->{kind} eq 'akamai' ) {
-			# disable akamai for now for video - broken...
+			# FIXME: disable akamai video streaming for now, it is broken...
+			main::logger "WARNING: skipping unsupported akamai video stream '$cattribs->{identifier}\@$cattribs->{server}'\n" if $ext eq 'mp4';
 			next if $ext eq 'mp4';
 			# Set the live flag if this is not an ondemand stream
 			$conn->{live} = 1 if defined $cattribs->{application} && $cattribs->{application} =~ /^live/;
